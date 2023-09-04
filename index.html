@@ -1,9 +1,38 @@
 <!DOCTYPE html>
-<html>
-  <head>
-  </head>
-  <body>
-    <h1>Hello world</h1>
-    <h2>ようこそ私のWEBサイトへ</h2>
-  </body>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音声入力</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button id="recordButton">音声入力開始</button>
+    <script src="script.js"></script>
+</body>
 </html>
+document.getElementById('recordButton').addEventListener('click', function() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    
+    recognition.lang = 'ja-JP';
+    recognition.start();
+
+    recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        alert('入力された音声: ' + transcript);
+    };
+});
+#recordButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#recordButton:hover {
+    background-color: #45a049;
+}
